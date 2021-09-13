@@ -1,9 +1,12 @@
 ## Hi there 👋 I'm David.
 #### I build websites!
 
-## See my portfolio [here](https://davidsling.in)
+## 🌐 See my portfolio [here](https://davidsling.in)
 
 - I am a full stack web development intern at [nonceblox](https://www.nonceblox.com/).
+ <a href="https://www.linkedin.com/in/david-sling/">
+  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
+</a>
 
 ## Top Projects
 
