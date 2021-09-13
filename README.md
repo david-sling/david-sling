@@ -3,7 +3,7 @@
 
 ## See my portfolio [here](https://davidsling.in)
 
-- I am a full stack web developer looking for internships.
+- I am a full stack web development intern at [nonceblox](https://www.nonceblox.com/).
 
 ## Top Projects
 
