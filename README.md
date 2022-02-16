@@ -3,7 +3,7 @@
 
 ## 🌐 See my portfolio [here](https://davidsling.in)
 
-- I am a full stack web development intern at [nonceblox](https://www.nonceblox.com/).
+- I am a frontend developer intern at [Trademarkia](https://www.trademarkia.com/).
  <a href="https://www.linkedin.com/in/david-sling/">
   <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
 </a>
