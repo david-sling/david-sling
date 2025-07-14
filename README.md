@@ -3,7 +3,7 @@
 
 ## 🌐 See my portfolio [here](https://davidsling.in)
 
-Frontend developer at [Trademarkia](https://www.trademarkia.com/).
+Frontend developer
 <br/>
 <br/>
  <a href="https://www.linkedin.com/in/david-sling/">
