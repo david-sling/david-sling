@@ -46,13 +46,12 @@ function oklch(L, C, h, alpha = 1) {
   return alpha === 1 ? `rgb(${R},${G},${B})` : `rgba(${R},${G},${B},${alpha})`
 }
 
-// Dark project tiles are the same in both themes, as on the site.
+// Project tiles in dark mode: the site's near-black tile.
 const night = {
   fill: oklch(0.21, 0.014, 245),
   ink: oklch(0.95, 0.006, 225),
   ink2: oklch(0.76, 0.01, 230),
   ink3: oklch(0.64, 0.01, 235),
-  rule: 'rgba(255,255,255,0.1)',
 }
 
 // GitHub's page is white or #0d1117, so the light sheet steps down to the
@@ -65,7 +64,6 @@ const themes = {
     ink: oklch(0.21, 0.014, 245),
     ink3: oklch(0.58, 0.01, 245),
     blueText: oklch(0.47, 0.1, 224),
-    nightEdge: 'rgba(0,0,0,0)',
   },
   dark: {
     sheet: oklch(0.205, 0.012, 245),
@@ -80,6 +78,33 @@ const themes = {
 
 const blue = oklch(0.81, 0.105, 214)
 const brand = { wave: '#f8c840', offlyn: '#ff6b9f', equanim: '#06b6d4' }
+// Each project's deep ink, the site's --*-deep tokens: text that reads on its colour.
+const deep = {
+  wave: [0.22, 0.04, 85],
+  offlyn: [0.24, 0.06, 0],
+  equanim: [0.2, 0.035, 225],
+}
+
+/**
+ * A project tile's palette. Dark mode keeps the site's near-black tile with
+ * the name in the project's colour; light mode fills the tile with that
+ * colour and sets everything in the project's deep ink, as the OG cards do.
+ */
+function projectPalette(theme, key) {
+  if (theme === 'dark') {
+    return { ...night, name: brand[key], edge: themes.dark.nightEdge, chip: false }
+  }
+  const ink = (a = 1) => oklch(...deep[key], a)
+  return {
+    fill: brand[key],
+    ink: ink(),
+    ink2: ink(0.82),
+    ink3: ink(0.66),
+    name: ink(),
+    edge: 'rgba(0,0,0,0)',
+    chip: true,
+  }
+}
 
 /* ---------- a tiny element helper, so this needs no JSX build ---------- */
 
@@ -280,50 +305,60 @@ function hero(t) {
   )
 }
 
-const nightFace = (t, style) => ({
+const projectFace = (p, style) => ({
   ...faceBase,
-  background: night.fill,
-  color: night.ink,
-  border: `1px solid ${t.nightEdge}`,
+  background: p.fill,
+  color: p.ink,
+  border: `1px solid ${p.edge}`,
   ...style,
 })
 
+/** A project's mark. On its own colour it sits on a white tile so it still reads. */
+function mark(p, content, size, radius) {
+  if (!p.chip) return content
+  return div(
+    {
+      width: size,
+      height: size,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: radius,
+      background: '#ffffff',
+      boxShadow: '0 14px 28px -14px rgba(0,0,0,0.35)',
+    },
+    content,
+  )
+}
+
 const label = (text, color) => div({ fontSize: 13, fontWeight: 600, color }, text)
 
-function wave(t) {
+function wave(t, theme) {
+  const p = projectPalette(theme, 'wave')
+  const hand = p.chip ? 64 : 88
   return frame(
     UNIT * 2,
     UNIT,
     div(
-      nightFace(t, { flexDirection: 'row', alignItems: 'stretch', padding: 22 }),
+      projectFace(p, { flexDirection: 'row', alignItems: 'stretch', padding: 22 }),
       div(
         { width: 150, alignItems: 'center', justifyContent: 'center' },
-        img(dataUrl(asset('wave.png'), 'image/png'), 88, 88, {
-          transform: 'rotate(-8deg)',
-        }),
+        mark(
+          p,
+          img(dataUrl(asset('wave.png'), 'image/png'), hand, hand, { transform: 'rotate(-8deg)' }),
+          104,
+          30,
+        ),
       ),
       div(
         { flex: 1, flexDirection: 'column', justifyContent: 'space-between', marginLeft: 8 },
-        div({ justifyContent: 'flex-end' }, arrow(night.ink, false)),
+        div({ justifyContent: 'flex-end' }, arrow(p.ink, false)),
         div(
           { flexDirection: 'column' },
-          label('Project', night.ink3),
-          div({ fontSize: 28, fontWeight: 600, letterSpacing: '-0.025em', color: brand.wave }, 'Wave'),
+          label('Project', p.ink3),
+          div({ fontSize: 28, fontWeight: 600, letterSpacing: '-0.025em', color: p.name }, 'Wave'),
           div(
-            { marginTop: 4, fontSize: 15, lineHeight: 1.3, color: night.ink2 },
+            { marginTop: 4, fontSize: 15, lineHeight: 1.3, color: p.ink2 },
             'Group chat for AI coding agents, while you supervise.',
-          ),
-          div(
-            {
-              marginTop: 14,
-              paddingTop: 11,
-              borderTop: `1px solid ${night.rule}`,
-              flexDirection: 'column',
-              fontSize: 13,
-              fontWeight: 600,
-            },
-            div({ color: night.ink3 }, 'Now building'),
-            div({ color: night.ink }, 'End-to-end encryption'),
           ),
         ),
       ),
@@ -331,46 +366,48 @@ function wave(t) {
   )
 }
 
-function offlyn(t) {
+function offlyn(t, theme) {
+  const p = projectPalette(theme, 'offlyn')
   return frame(
     UNIT,
     UNIT,
     div(
-      nightFace(t),
-      div({ justifyContent: 'flex-end' }, arrow(night.ink, false)),
+      projectFace(p),
+      div({ justifyContent: 'flex-end' }, arrow(p.ink, false)),
       div(
         { flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: -8 },
-        img(dataUrl(asset('offlyn.svg'), 'image/svg+xml'), 48, 38),
+        mark(p, img(dataUrl(asset('offlyn.svg'), 'image/svg+xml'), 40, 32), 64, 20),
       ),
       div(
         { flexDirection: 'column' },
-        label('Project', night.ink3),
-        div({ fontSize: 21, fontWeight: 600, letterSpacing: '-0.02em', color: brand.offlyn }, 'offlyn.love'),
-        div({ fontSize: 13.5, lineHeight: 1.3, color: night.ink2 }, 'Dating through friends of friends'),
+        label('Project', p.ink3),
+        div({ fontSize: 21, fontWeight: 600, letterSpacing: '-0.02em', color: p.name }, 'offlyn.love'),
+        div({ fontSize: 13.5, lineHeight: 1.3, color: p.ink2 }, 'Dating through friends of friends'),
       ),
     ),
   )
 }
 
-function equanim(t) {
+function equanim(t, theme) {
+  const p = projectPalette(theme, 'equanim')
   return frame(
     UNIT,
     UNIT,
     div(
-      nightFace(t),
+      projectFace(p),
       svg(
         170,
         170,
         '0 0 200 200',
-        [path(pendulumTrace(), { stroke: night.ink, strokeWidth: 0.9, strokeOpacity: 0.24 })],
+        [path(pendulumTrace(), { stroke: p.ink, strokeWidth: 0.9, strokeOpacity: p.chip ? 0.3 : 0.24 })],
         { position: 'absolute', right: -46, top: -58 },
       ),
-      div({ justifyContent: 'flex-end' }, arrow(night.ink, false)),
+      div({ justifyContent: 'flex-end' }, arrow(p.ink, false)),
       div(
         { flexDirection: 'column' },
-        label('Playground', night.ink3),
-        div({ fontSize: 21, fontWeight: 600, letterSpacing: '-0.02em', color: brand.equanim }, 'Equanim'),
-        div({ fontSize: 13.5, lineHeight: 1.3, color: night.ink2 }, 'Animation as maths'),
+        label('Playground', p.ink3),
+        div({ fontSize: 21, fontWeight: 600, letterSpacing: '-0.02em', color: p.name }, 'Equanim'),
+        div({ fontSize: 13.5, lineHeight: 1.3, color: p.ink2 }, 'Animation as maths'),
       ),
     ),
   )
