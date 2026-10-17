@@ -1,30 +1,13 @@
-# Hi, I'm David. The practical developer.
+<!--
+  Cards are drawn by render/render.mjs (npm run render) from davidsling.in's hero.
+  Tiles carry their own gutters, so each row's links must stay on one line with
+  no whitespace between them.
+-->
 
-I build web apps that have goals. I work with Next.js.
+<a href="https://davidsling.in"><picture><source media="(prefers-color-scheme: dark)" srcset="cards/hero-dark.svg"><img src="cards/hero-light.svg" width="100%" alt="Hi, I’m David. Engineer with a designer’s eye. I build real products with AI agents, and sweat the details they miss. davidsling.in"></picture></a>
 
-Currently building **[offlyn.love](https://offlyn.love)** — a friend-referral dating app (React Native + TanStack Start + Supabase).
+<p><a href="https://davidsling.in/work/wave"><picture><source media="(prefers-color-scheme: dark)" srcset="cards/wave-dark.svg"><img src="cards/wave-light.svg" width="50%" alt="Wave: group chat for AI coding agents, while you supervise. Now building end-to-end encryption."></picture></a><a href="https://davidsling.in/work/offlyn"><picture><source media="(prefers-color-scheme: dark)" srcset="cards/offlyn-dark.svg"><img src="cards/offlyn-light.svg" width="25%" alt="offlyn.love: dating through friends of friends."></picture></a><a href="https://davidsling.in/work/equanim#playground"><picture><source media="(prefers-color-scheme: dark)" srcset="cards/equanim-dark.svg"><img src="cards/equanim-light.svg" width="25%" alt="Equanim playground: animation as maths."></picture></a></p>
 
-&nbsp;
+<p><a href="https://davidsling.in/blogs/vibecoded-dating-app"><picture><source media="(prefers-color-scheme: dark)" srcset="cards/post-dark.svg"><img src="cards/post-light.svg" width="50%" alt="Latest writing: I Vibecoded a Full Stack App. Here’s How it Went."></picture></a><a href="https://davidsling.in/resume"><picture><source media="(prefers-color-scheme: dark)" srcset="cards/resume-dark.svg"><img src="cards/resume-light.svg" width="25%" alt="Resume (PDF)"></picture></a><a href="mailto:me@davidsling.in"><picture><source media="(prefers-color-scheme: dark)" srcset="cards/email-dark.svg"><img src="cards/email-light.svg" width="25%" alt="Say hi: me@davidsling.in"></picture></a></p>
 
-## 🌐 Portfolio &nbsp;·&nbsp; [davidsling.in](https://davidsling.in)
-
-&nbsp;
-
-## Latest writing
-
-**[I Vibecoded a Full Stack App. Here's How it Went.](https://www.davidsling.in/blogs/vibecoded-dating-app)**
-&nbsp;What actually changes when AI writes your code — and what doesn't.
-
-&nbsp;
-
-<a href="https://www.linkedin.com/in/david-sling/">
-  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
-</a>
-&nbsp;
-<a href="https://www.instagram.com/davidsling.in">
-  <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"/>
-</a>
-
-&nbsp;
-
-> *Anything that can be written in TypeScript, will eventually be written in TypeScript.* — Jeff Delaney
+<p><a href="https://davidsling.in/blogs"><picture><source media="(prefers-color-scheme: dark)" srcset="cards/writing-dark.svg"><img src="cards/writing-light.svg" width="33.33%" alt="All writing"></picture></a><a href="https://www.linkedin.com/in/david-sling"><picture><source media="(prefers-color-scheme: dark)" srcset="cards/linkedin-dark.svg"><img src="cards/linkedin-light.svg" width="33.33%" alt="LinkedIn"></picture></a><a href="https://www.instagram.com/davidsling.in"><picture><source media="(prefers-color-scheme: dark)" srcset="cards/instagram-dark.svg"><img src="cards/instagram-light.svg" width="33.33%" alt="Instagram"></picture></a></p>

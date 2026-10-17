@@ -1,0 +1,12 @@
+{
+  "name": "david-sling-profile",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "render": "node render/render.mjs"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "satori": "^0.62.0"
+  }
+}
