@@ -222,11 +222,15 @@ const UNIT = 216 // one grid column; the README is four across
 const GAP = 12
 const font = { fontFamily: 'General Sans', fontWeight: 500 }
 
-/** A tile's outer box: transparent margin of half a gap around the painted face. */
+/**
+ * A tile's outer box: transparent margin of half a gap on the top and sides.
+ * There's none below, because the README's line breaks already leave about
+ * that much space under each row of inline images.
+ */
 function frame(w, ht, face) {
   return div(
-    { width: w, height: ht, position: 'relative', ...font },
-    div({ position: 'absolute', top: GAP / 2, left: GAP / 2, right: GAP / 2, bottom: GAP / 2 }, face),
+    { width: w, height: ht - GAP / 2, position: 'relative', ...font },
+    div({ position: 'absolute', top: GAP / 2, left: GAP / 2, right: GAP / 2, bottom: 0 }, face),
   )
 }
 
@@ -536,7 +540,7 @@ mkdirSync(out, { recursive: true })
 
 for (const [theme, t] of Object.entries(themes)) {
   for (const [name, [width, height, draw]] of Object.entries(cards)) {
-    const markup = await satori(draw(t, theme), { width, height, fonts })
+    const markup = await satori(draw(t, theme), { width, height: height - GAP / 2, fonts })
     writeFileSync(resolve(out, `${name}-${theme}.svg`), markup)
     if (process.env.PREVIEW) {
       const png = new Resvg(markup, { fitTo: { mode: 'width', value: width * 2 } }).render().asPng()
